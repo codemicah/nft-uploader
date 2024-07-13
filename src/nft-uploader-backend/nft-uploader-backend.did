@@ -1,3 +1,6 @@
-service : {
-    "greet" : (text) -> (text) query;
+service: () -> {
+    getUsers: () -> (text) query;
+    greet: (text) -> (text) query;
+    login: (text, text) -> (text) query;
+    register: (text, text) -> (text);
 }
