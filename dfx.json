@@ -1,0 +1,39 @@
+{
+  "canisters": {
+    "nft-uploader-backend": {
+      "build": "npx azle nft-uploader-backend",
+      "candid": "src/nft-uploader-backend/nft-uploader-backend.did",
+      "gzip": true,
+      "main": "src/nft-uploader-backend/src/index.ts",
+      "tech_stack": {
+        "cdk": {
+          "azle": {}
+        },
+        "language": {
+          "javascript": {},
+          "typescript": {}
+        }
+      },
+      "type": "custom",
+      "wasm": ".azle/nft-uploader-backend/nft-uploader-backend.wasm"
+    },
+    "nft-uploader-frontend": {
+      "dependencies": [
+        "nft-uploader-backend"
+      ],
+      "source": [
+        "src/nft-uploader-frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "nft-uploader-frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
