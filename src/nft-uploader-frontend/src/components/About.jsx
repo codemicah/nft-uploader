@@ -3,7 +3,7 @@ const About = () => {
     <div className="sm:flex items-center mx-auto max-w-screen-xl px-6 lg:px-8">
       <div className="sm:w-1/2 p-10">
         <div className="image object-center text-center">
-          <img src="https://i.imgur.com/WbQnbas.png" />
+          <img src="/img/WbQnbas.png" />
         </div>
       </div>
       <div className="sm:w-1/2 p-5">

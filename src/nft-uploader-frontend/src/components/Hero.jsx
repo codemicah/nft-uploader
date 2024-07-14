@@ -27,7 +27,7 @@ const Hero = () => {
         <img
           className="object-cover object-center rounded"
           alt="hero"
-          src="https://www.svgrepo.com/show/358718/logo-windows.svg"
+          src="/svg/logo-windows.svg"
         />
       </div>
     </div>

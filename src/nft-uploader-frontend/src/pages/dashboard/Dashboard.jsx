@@ -1,7 +1,9 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../../components/dashboard/Sidebar";
+import { useUser } from "../../hooks/useUser";
 
 const Dashboard = () => {
+  const { logout } = useUser();
   return (
     <div className="flex w-full  h-[100dvh]">
       <Sidebar />
@@ -101,12 +103,18 @@ const Dashboard = () => {
               <button
                 title="Page Menu"
                 aria-label="page menu"
-                className="h-full w-full rounded-full border focus:outline-none focus:shadow-outline"
+                className="h-full w-full overflow-hidden rounded-full border focus:outline-none focus:shadow-outline"
               >
-                <img
-                  className="h-full w-full rounded-full mx-auto"
-                  src="https://raw.githubusercontent.com/bluebrown/tailwind-zendesk-clone/master/public/assets/me.jpg"
-                />
+                <div className="w-full h-full  bg-gray-400"></div>
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={logout}
+                className="ml-2 text-white bg-gray-800 hover:bg-gray-900 inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm "
+                href="/register"
+              >
+                Logout
               </button>
             </li>
           </ul>

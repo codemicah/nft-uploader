@@ -4,7 +4,7 @@ const Sidebar = () => {
   return (
     <nav
       aria-label="Sidebar"
-      className="hidden lg:block lg:flex-shrink-0 lg:overflow-y-auto lg:bg-gray-800"
+      className=" lg:block lg:flex-shrink-0 lg:overflow-y-auto lg:bg-gray-800"
     >
       <div className="relative flex w-20 flex-col space-y-3 p-3">
         <a
