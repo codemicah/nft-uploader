@@ -34,7 +34,7 @@ export const loginUser = (email: string, password: string) => {
 export const getUserByEmail = (email: string) => {
   const user = users.get(email);
 
-  if (!user) {
+  if (user.None) {
     return null;
   }
 

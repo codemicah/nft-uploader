@@ -15,11 +15,11 @@ export default Canister({
         return errorResponse(400, "Invalid email", null);
       }
 
-      const userExists = getUserByEmail(email);
+      // const userExists = getUserByEmail(email);
 
-      if (userExists) {
-        return errorResponse(400, "User already exists", null);
-      }
+      // if (userExists) {
+      //   return errorResponse(400, "User already exists", null);
+      // }
 
       const user = createUser(email, password);
       return successResponse(200, "User created successfully", user);
