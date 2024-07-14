@@ -1,15 +1,27 @@
 import { Canister, query, text, update } from "azle";
-import { createUser, loginUser, getAllUsers } from "./db";
-import { errorResponse, successResponse } from "./utils";
+import {
+  createUser,
+  loginUser,
+  getAllUsers,
+  createNFT,
+  getUserByEmail,
+} from "./db";
+import { errorResponse, isValidEmail, successResponse } from "./utils";
 
 export default Canister({
-  greet: query([text], text, (name) => {
-    return `Hello, ${name}!`;
-  }),
   register: update([text, text], text, (email, password) => {
     try {
+      if (!isValidEmail(email)) {
+        return errorResponse(400, "Invalid email", null);
+      }
+
+      const userExists = getUserByEmail(email);
+
+      if (userExists) {
+        return errorResponse(400, "User already exists", null);
+      }
+
       const user = createUser(email, password);
-      console.log(user);
       return successResponse(200, "User created successfully", user);
     } catch (error: any) {
       return errorResponse(500, "Error creating account", error);
@@ -17,6 +29,10 @@ export default Canister({
   }),
   login: query([text, text], text, async (email, password) => {
     try {
+      if (!isValidEmail(email)) {
+        return errorResponse(400, "Invalid email", null);
+      }
+
       const user = loginUser(email, password);
 
       if (!user) {
@@ -34,6 +50,24 @@ export default Canister({
       return successResponse(200, "Users fetched successfully", users);
     } catch (error: any) {
       return errorResponse(500, "Error fetching users", error);
+    }
+  }),
+  createNFT: update([text], text, (payload) => {
+    try {
+      const jsonPayload = JSON.parse(payload);
+
+      const nftData = {
+        title: jsonPayload.title,
+        description: jsonPayload.description,
+        imageUrl: jsonPayload.imageUrl,
+        owner: jsonPayload.owner,
+      };
+
+      const nft = createNFT(nftData);
+
+      return successResponse(200, "NFT created successfully", nft);
+    } catch (error: any) {
+      return errorResponse(500, "Error creating NFT", error);
     }
   }),
 });

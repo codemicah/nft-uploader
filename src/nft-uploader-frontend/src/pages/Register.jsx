@@ -2,12 +2,15 @@ import { useState } from "react";
 import { nft_uploader_backend } from "../../../declarations/nft-uploader-backend";
 import PageHoc from "../components/PageHoc";
 import { toast } from "react-toastify";
+import { useUser } from "../hooks/useUser";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const { setCurrentUser } = useUser();
+  const navigate = useNavigate();
   const handleSubmit = () => {
     if (email === "" || password === "") {
       toast.error("Please fill in all fields");
@@ -18,9 +21,11 @@ const Register = () => {
       let res = JSON.parse(response);
       if (res.statusCode === 200) {
         console.log(res);
-        window.location.href = "/dashboard/gallery";
+        setCurrentUser(res.data);
+        navigate("/dashboard/gallery");
       } else {
-        toast.error("Invalid email or password");
+        console.log(res);
+        toast.error(res.message);
       }
       setLoading(false);
     });

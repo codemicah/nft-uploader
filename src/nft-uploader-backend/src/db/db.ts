@@ -1,8 +1,9 @@
+import { StableBTreeMap } from "azle";
 import { INFT, IUser } from "../interfaces";
 import { randomID } from "../utils";
 
-const users: IUser[] = [];
-const nfts: INFT[] = [];
+const users = StableBTreeMap<string, IUser>(0);
+const nfts = StableBTreeMap<string, INFT>(1);
 
 export const createUser = (email: string, password: string) => {
   const user: IUser = {
@@ -10,33 +11,39 @@ export const createUser = (email: string, password: string) => {
     email,
     password,
   };
-  users.push(user);
-  return user;
+
+  users.insert(email, user);
+  return { email: user.email, id: user.id };
 };
 
 export const loginUser = (email: string, password: string) => {
-  const user = users.find((user) => user.email === email);
-  if (!user) {
+  const user = users.get(email);
+
+  if (user.None) {
     return null;
   }
-  const isPasswordCorrect = password === user.password;
+
+  const isPasswordCorrect = password === user.Some?.password;
   if (!isPasswordCorrect) {
     return null;
   }
 
-  return user;
+  return { email: user.Some?.email, id: user.Some?.id };
 };
 
-export const getUserByEmail = async (email: string) => {
-  return users.find((user) => user.email === email);
+export const getUserByEmail = (email: string) => {
+  const user = users.get(email);
+
+  if (!user) {
+    return null;
+  }
+
+  return { email: user.Some?.email, id: user.Some?.id };
 };
 
-export const createNFT = async (
-  title: string,
-  description: string,
-  imageUrl: string,
-  owner: string
-) => {
+export const createNFT = (payload: Omit<INFT, "id">) => {
+  const { title, description, imageUrl, owner } = payload;
+
   const nft: INFT = {
     id: randomID(),
     title,
@@ -44,14 +51,18 @@ export const createNFT = async (
     imageUrl,
     owner,
   };
-  nfts.push(nft);
+
+  nfts.insert(nft.id, nft);
   return nft;
 };
 
 export const getNFTs = () => {
-  return nfts;
+  return nfts.values();
 };
 
 export const getAllUsers = () => {
-  return users;
+  return users.values().map((user) => ({
+    email: user.email,
+    id: user.id,
+  }));
 };

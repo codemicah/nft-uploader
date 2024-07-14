@@ -2,21 +2,24 @@ import PageHoc from "../components/PageHoc";
 import { nft_uploader_backend } from "../../../declarations/nft-uploader-backend";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useUser } from "../hooks/useUser";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const { setCurrentUser } = useUser();
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
-    console.log(email, password);
     nft_uploader_backend.login(email, password).then((response) => {
       let res = JSON.parse(response);
       if (res.statusCode === 200) {
-        window.location.href = "/dashboard/gallery";
+        setCurrentUser(res.data);
+        navigate("/dashboard/gallery");
       } else {
-        console.log(res);
-        toast.error("Invalid email or password");
+        toast.error(res.message);
       }
     });
     setLoading(false);

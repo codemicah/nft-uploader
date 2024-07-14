@@ -1,7 +1,7 @@
 const GalleryCard = ({ type, image, name, listedPrice, currentPrice }) => {
   return (
     <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-      <a href="#">
+      <div href="">
         <img
           src={image}
           alt="Product"
@@ -39,7 +39,7 @@ const GalleryCard = ({ type, image, name, listedPrice, currentPrice }) => {
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   );
 };

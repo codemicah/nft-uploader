@@ -1,6 +1,6 @@
 service: () -> {
+    createNFT: (text) -> (text);
     getUsers: () -> (text) query;
-    greet: (text) -> (text) query;
     login: (text, text) -> (text) query;
     register: (text, text) -> (text);
 }
