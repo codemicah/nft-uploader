@@ -9,7 +9,7 @@ const Login = () => {
     nft_uploader_backend.login(email, password).then((response) => {
       let res = JSON.parse(response);
       if (res.statusCode === 200) {
-        window.location.href = "/gallery";
+        window.location.href = "/dashboard/gallery";
       } else {
         console.log(res);
         alert("Invalid email or password");

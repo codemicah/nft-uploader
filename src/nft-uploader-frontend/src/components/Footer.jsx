@@ -12,9 +12,6 @@ const Footer = () => {
             className="inline-flex items-center"
           >
             <Logo />
-            <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-              Company
-            </span>
           </a>
           <div className="mt-6 lg:max-w-sm">
             <p className="text-sm text-gray-800">

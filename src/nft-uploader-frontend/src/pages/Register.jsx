@@ -17,7 +17,7 @@ const Register = () => {
       let res = JSON.parse(response);
       if (res.statusCode === 200) {
         console.log(res);
-        window.location.href = "/gallery";
+        window.location.href = "/dashboard/gallery";
       } else {
         alert("Invalid email or password");
       }
