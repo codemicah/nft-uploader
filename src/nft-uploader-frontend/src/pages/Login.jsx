@@ -1,8 +1,12 @@
 import PageHoc from "../components/PageHoc";
 import { nft_uploader_backend } from "../../../declarations/nft-uploader-backend";
+import { toast } from "react-toastify";
+import { useState } from "react";
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
     console.log(email, password);
@@ -12,9 +16,10 @@ const Login = () => {
         window.location.href = "/dashboard/gallery";
       } else {
         console.log(res);
-        alert("Invalid email or password");
+        toast.error("Invalid email or password");
       }
     });
+    setLoading(false);
   };
   return (
     <div className=" flex font-poppins items-center justify-center">
@@ -30,7 +35,7 @@ const Login = () => {
               </h1>
               <form onSubmit={(e) => handleSubmit(e)} className="space-y-4">
                 <div>
-                  <label for="email" className="mb-2   text-lg">
+                  <label htmlFor="email" className="mb-2   text-lg">
                     Email
                   </label>
                   <input
@@ -42,7 +47,7 @@ const Login = () => {
                   />
                 </div>
                 <div>
-                  <label for="password" className="mb-2  text-lg">
+                  <label htmlFor="password" className="mb-2  text-lg">
                     Password
                   </label>
                   <input
@@ -59,10 +64,11 @@ const Login = () => {
                   </span>
                 </a>
                 <button
+                  disabled={loading}
                   className="bg-gradient-to-r  from-blue-500 to-purple-500 shadow-lg mt-6 p-2 text-white rounded-lg w-full hover:scale-105 hover:from-purple-500 hover:to-blue-500 transition duration-300 ease-in-out"
                   type="submit"
                 >
-                  LOG IN
+                  {loading ? "Loading..." : "LOG IN"}
                 </button>
               </form>
               <div className="flex flex-col mt-4 items-center justify-center text-sm">

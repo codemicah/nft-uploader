@@ -10,6 +10,9 @@ import Gallery from "./components/dashboard/Gallery";
 import UserProvider from "./context/UserContext";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Profile from "./components/dashboard/Profile";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,5 +46,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <UserProvider>
       <RouterProvider router={router} />
     </UserProvider>
+    <ToastContainer />
   </React.StrictMode>
 );

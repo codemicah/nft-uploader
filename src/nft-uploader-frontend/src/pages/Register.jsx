@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { nft_uploader_backend } from "../../../declarations/nft-uploader-backend";
 import PageHoc from "../components/PageHoc";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +10,7 @@ const Register = () => {
 
   const handleSubmit = () => {
     if (email === "" || password === "") {
-      alert("Please fill in all fields");
+      toast.error("Please fill in all fields");
       return;
     }
     setLoading(true);
@@ -19,7 +20,7 @@ const Register = () => {
         console.log(res);
         window.location.href = "/dashboard/gallery";
       } else {
-        alert("Invalid email or password");
+        toast.error("Invalid email or password");
       }
       setLoading(false);
     });
