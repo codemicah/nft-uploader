@@ -22,8 +22,16 @@ const UserProvider = ({ children }) => {
     setLoading(false);
   };
 
+  const logout = () => {
+    localStorage.removeItem("userData");
+    setUser(null);
+    navigate("/");
+  };
+
   return (
-    <userContext.Provider value={{ user, setCurrentUser, loading, setLoading }}>
+    <userContext.Provider
+      value={{ user, setCurrentUser, loading, setLoading, logout }}
+    >
       {children}
     </userContext.Provider>
   );

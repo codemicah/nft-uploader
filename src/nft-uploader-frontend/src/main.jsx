@@ -13,6 +13,7 @@ import Profile from "./components/dashboard/Profile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from "./components/dashboard/PrivateRoute";
+import Minted from "./components/dashboard/Minted";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           >
             <Route path="/dashboard/gallery" element={<Gallery />} />
             <Route path="/dashboard/profile" element={<Profile />} />
+            <Route path="/dashboard/mint" element={<Minted />} />
           </Route>
         </Routes>
       </UserProvider>
